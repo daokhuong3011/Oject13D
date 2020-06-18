@@ -31,10 +31,11 @@ public class Coordinates extends JPanel {
                 // vẽ hệ tọa độ 3D
                 Axis3D(g2d);
                 // biến dổi x , z người dùng nhập vào thành tọa độ máy tính ( đây là nhập tâm trong mặt phằng 0xz nên ràng buộc là y=0)
-                int x = converX3Dto2D(50, 30);
-                int z= converZ3Dto2D(30);
+                int y = converY3Dto2D(-10);
+                int x = converX3Dto2D(10, 10);
+                int z= converZ3Dto2D(10);
                 // vẽ hình nón 3D tại đây
-                drawCone3D(x, z, 100,200,g2d);
+                drawCone3D(x, z, y,100,200,g2d);
                 
 	}
 
@@ -89,20 +90,21 @@ public class Coordinates extends JPanel {
             // to mau
             g2d.setColor(Color.GRAY);
             g2d.setStroke(new BasicStroke(1));
-            for(int i=1; i<=140;i++)
-            {
-                g2d.drawLine(300+i*5, 290, 0+i*5, 580);
-                
-            }
-            for(float i=1; i<=58;i++)
-            {
-                g2d.drawLine((int)(300-(i*5.0*(float)30/29)), (int)(290+(i*5)), 600, (int)(290+(i*5))); //doi=ke*tan 300/290
-                //System.out.println(300-(i*5.0*(float)30/29));
-            }
+//            for(int i=1; i<=140;i++)
+//            {
+//                g2d.drawLine(300+i*5, 290, 0+i*5, 580);
+//                
+//            }
+//            for(float i=1; i<=58;i++)
+//            {
+//                g2d.drawLine((int)(300-(i*5.0*(float)30/29)), (int)(290+(i*5)), 600, (int)(290+(i*5))); //doi=ke*tan 300/290
+//                //System.out.println(300-(i*5.0*(float)30/29));
+//            }
             
         }
-        public void drawCone3D(int ox, int oy, int r,int h,Graphics2D g2d)
+        public void drawCone3D(int ox, int oy,int y, int r,int h,Graphics2D g2d)
         {
+            oy=oy-y;
             g2d.setColor(Color.BLUE);
             // scale tỉ lệ vì hình tròn khi vẽ 3d thành hình eclip
             int a=r,  b = a/2;
@@ -136,5 +138,9 @@ public class Coordinates extends JPanel {
         public int converZ3Dto2D(int z)
         {
             return (int)(z*5*0.6950+290); // 0.6950 = cos(30/29)
+        }
+        public int converY3Dto2D(int y)
+        {
+            return (y*5);
         }
 }
